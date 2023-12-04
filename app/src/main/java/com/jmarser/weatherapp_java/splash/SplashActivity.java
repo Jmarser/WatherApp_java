@@ -8,6 +8,10 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jmarser.weatherapp_java.databinding.ActivitySplashBinding;
+import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
+import com.jmarser.weatherapp_java.di.appComponent.DaggerAppComponent;
+import com.jmarser.weatherapp_java.di.appModule.AppModule;
+import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
 import com.jmarser.weatherapp_java.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -21,9 +25,20 @@ public class SplashActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        initInjection();
+
         setContentView(binding.getRoot());
 
         goToMain();
+    }
+
+    private void initInjection(){
+        AppComponent appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this, this))
+                .sharedPreferencesModule(new SharedPreferencesModule(this))
+                .build();
+
+        appComponent.inject(this);
     }
 
     private void goToMain() {
