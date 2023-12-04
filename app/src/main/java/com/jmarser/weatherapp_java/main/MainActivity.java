@@ -1,8 +1,10 @@
-package com.jmarser.weatherapp_java;
+package com.jmarser.weatherapp_java.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.jmarser.weatherapp_java.R;
 
 public class MainActivity extends AppCompatActivity {
 

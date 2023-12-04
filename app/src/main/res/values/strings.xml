@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherApp_java</string>
+    <string name="mi_marca">JMARSER</string>
+    <string name="slogan_app">El clima importa,\nadelantate a él</string>
 </resources>
