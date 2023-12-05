@@ -12,7 +12,7 @@ import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
 import com.jmarser.weatherapp_java.di.appComponent.DaggerAppComponent;
 import com.jmarser.weatherapp_java.di.appModule.AppModule;
 import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
-import com.jmarser.weatherapp_java.main.MainActivity;
+import com.jmarser.weatherapp_java.main.view.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,18 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    android:background="@drawable/sunny_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".main.view.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="5dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- id => ll_cabecera -->
+            <LinearLayout
+                android:id="@+id/ll_cabecera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/sv_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@color/white"
+                    app:queryHint="Buscar por ciudad"
+                    android:background="@drawable/custom_searchview"/>
+
+                <ImageView
+                    android:id="@+id/btn_location"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_mi_location"
+                    android:layout_marginHorizontal="8dp"/>
+
+                <ImageView
+                    android:id="@+id/btn_menu"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_menu_vertical"
+                    android:layout_marginEnd="8dp"/>
+
+            </LinearLayout>
+
+            <!-- id => tab_dots -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_dots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:tabMode="scrollable"
+                style="@style/CustomTabLayout"
+                android:background="@android:color/transparent"
+                app:tabBackground="@android:color/transparent"
+                app:elevation="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/ll_cabecera"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- id => vp_fragment -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/tab_dots"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <!-- id => tv_city_empty -->
+            <TextView
+                android:id="@+id/tv_city_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/city_empty"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/tab_dots"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

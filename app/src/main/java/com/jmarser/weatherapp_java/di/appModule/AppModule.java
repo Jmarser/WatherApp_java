@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.jmarser.weatherapp_java.main.MainActivity;
+import com.jmarser.weatherapp_java.main.view.MainActivity;
 import com.jmarser.weatherapp_java.splash.SplashActivity;
 
 import dagger.Module;
@@ -45,6 +45,14 @@ public class AppModule {
         return null;
     }
 
+    @NonNull
+    @Provides
+    public MainActivity mainActivity() {
+        if (mainActivity != null){
+            return mainActivity;
+        }
+        return null;
+    }
 
 
 

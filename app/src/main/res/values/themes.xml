@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.WeatherApp_java" parent="Base.Theme.WeatherApp_java" />
+
+    <style name="CustomTabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicator">@drawable/tab_indicator_circle</item>
+    </style>
 </resources>

@@ -2,4 +2,7 @@
     <string name="app_name">WeatherApp_java</string>
     <string name="mi_marca">JMARSER</string>
     <string name="slogan_app">El clima importa,\nadelantate a él</string>
+    <string name="city_empty">No hay información que mostrar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
