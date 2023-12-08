@@ -10,4 +10,12 @@
     <style name="CustomTabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabIndicator">@drawable/tab_indicator_circle</item>
     </style>
+
+    <style name="TextNormal" parent="Base.Theme.WeatherApp_java">
+        <item name="android:textColor">#CCCCCC</item>
+    </style>
+    <style name="TextNormal_bold" parent="TextNormal">
+        <item name="android:textColor">#CCCCCC</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

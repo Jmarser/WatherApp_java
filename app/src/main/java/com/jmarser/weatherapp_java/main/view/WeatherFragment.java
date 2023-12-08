@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jmarser.weatherapp_java.R;
 import com.jmarser.weatherapp_java.databinding.FragmentWeatherBinding;
@@ -39,6 +40,18 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentWeatherBinding.inflate(inflater, container, false);
+
+        initListener();
+
         return binding.getRoot();
+
+    }
+
+    private void initListener() {
+        binding.btnPronosticoDias.setOnClickListener(view -> showMessage());
+    }
+
+    private void showMessage() {
+        Toast.makeText(getContext(), "Nuevo mensaje desde el fragment", Toast.LENGTH_SHORT).show();
     }
 }

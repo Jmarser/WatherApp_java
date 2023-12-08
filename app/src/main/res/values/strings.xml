@@ -3,6 +3,30 @@
     <string name="mi_marca">JMARSER</string>
     <string name="slogan_app">El clima importa,\nadelantate a él</string>
     <string name="city_empty">No hay información que mostrar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_image">Imagen del tiempo</string>
+
+    <!-- TODO: textos de prueba -->
+    <string name="city_prueba">Ciudad</string>
+    <string name="temp_prueba">32ºC</string>
+    <string name="description_prueba">Descripción de prueba</string>
+    <string name="hora_prueba">22:50</string>
+    <string name="velocidad_prueba">25Km/h</string>
+    <string name="direccion_prueba">Nordeste</string>
+    <string name="pressure_prueba">1000mbar</string>
+    <string name="humedad_prueba">80%</string>
+    <string name="uvi_prueba">10</string>
+    <string name="visibility_prueba">10km</string>
+
+    <!-- TODO: textos fragment weather -->
+    <string name="pronostico_horas">Previsión prox. horas</string>
+    <string name="pronostico_dias">Previsión prox. días</string>
+    <string name="amanecer">Amanecer</string>
+    <string name="anochecer">Anochecer</string>
+    <string name="feels_temp">Sensación term.</string>
+    <string name="pressure">Presión</string>
+    <string name="humidity">Humedad</string>
+    <string name="uvi">Radiación UV.</string>
+    <string name="visibility">Visibilidad</string>
+
+
 </resources>
