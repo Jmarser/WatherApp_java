@@ -1,5 +1,7 @@
 package com.jmarser.weatherapp_java.di.appModule;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jmarser.weatherapp_java.api.wsApi.WsApi;
@@ -28,14 +30,14 @@ public class ConnectionModule {
     private String urlBase;
 
     public ConnectionModule() {
-        this.urlBase = Constants.SERVER_URL;
+        this.urlBase = Constants.SERVER_URL_BASE;
     }
 
     public ConnectionModule(String urlBase) {
         if(!urlBase.isEmpty()) {
             this.urlBase = urlBase;
         }else{
-            this.urlBase = Constants.SERVER_URL;
+            this.urlBase = Constants.SERVER_URL_BASE;
         }
     }
 

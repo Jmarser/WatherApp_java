@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.jmarser.weatherapp_java.R;
+import com.jmarser.weatherapp_java.api.models.WeatherBase;
 import com.jmarser.weatherapp_java.databinding.FragmentWeatherBinding;
+import com.jmarser.weatherapp_java.utils.Constants;
 
-public class WeatherFragment extends Fragment {
+public class WeatherFragment extends Fragment implements WeatherView{
 
     private FragmentWeatherBinding binding;
+
+    private WeatherBase weatherBase;
 
     public WeatherFragment() {
         // Required empty public constructor
@@ -31,7 +35,6 @@ public class WeatherFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -43,8 +46,9 @@ public class WeatherFragment extends Fragment {
 
         initListener();
 
-        return binding.getRoot();
 
+
+        return binding.getRoot();
     }
 
     private void initListener() {
@@ -53,5 +57,14 @@ public class WeatherFragment extends Fragment {
 
     private void showMessage() {
         Toast.makeText(getContext(), "Nuevo mensaje desde el fragment", Toast.LENGTH_SHORT).show();
+    }
+
+    /** Métodos para establecer y obtener el objeto WeatherBase */
+    public void setWeatherBase(WeatherBase weatherBase){
+        this.weatherBase = weatherBase;
+    }
+
+    public WeatherBase getWeatherBase() {
+        return weatherBase;
     }
 }

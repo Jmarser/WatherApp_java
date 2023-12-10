@@ -4,6 +4,10 @@
     <string name="slogan_app">El clima importa,\nadelantate a él</string>
     <string name="city_empty">No hay información que mostrar</string>
     <string name="text_image">Imagen del tiempo</string>
+    <string name="permision_location_message">Se necesitan acceder a los permisos de ubicación</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error_getlocation">Error al obtener la posición del dispositivo</string>
 
     <!-- TODO: textos de prueba -->
     <string name="city_prueba">Ciudad</string>

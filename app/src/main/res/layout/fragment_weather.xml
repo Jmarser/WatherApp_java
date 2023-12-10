@@ -43,11 +43,12 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:src="@drawable/cloudy"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
                     android:padding="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/tv_ciudad"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_temp_actual"/>
+                    app:layout_constraintEnd_toStartOf="@id/tv_temp_actual"
+                    app:layout_constraintBottom_toTopOf="@id/tv_description_temp_actual"/>
 
                 <TextView
                     android:id="@+id/tv_temp_actual"
@@ -58,11 +59,85 @@
                     android:textStyle="bold"
                     android:textSize="35sp"
                     app:layout_constraintTop_toTopOf="@id/img_temp_actual"
-                    app:layout_constraintBottom_toBottomOf="@id/img_temp_actual"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img_temp_actual"/>
+                    app:layout_constraintStart_toEndOf="@id/img_temp_actual"
+                    app:layout_constraintBottom_toTopOf="@id/ll_diferencial_temp"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_diferencial_temp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/img_temp_actual"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_temp_actual"
+                    app:layout_constraintBottom_toBottomOf="@id/img_temp_actual">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Temp. min"
+                            android:textAlignment="center"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Temp. min"
+                            android:textAlignment="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center_horizontal|center_vertical">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/temp_min"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/temp_prueba"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center_horizontal|center_vertical">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/temp_max"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/temp_prueba"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
 
                 <TextView
+                    android:id="@+id/tv_description_temp_actual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/description_prueba"
