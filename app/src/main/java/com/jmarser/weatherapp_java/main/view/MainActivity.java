@@ -190,12 +190,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public void onErrorWeather() {
-
+        // TODO: Gestionar el error al obtener los datos del servidor
     }
 
     @Override
     public void ErrorServer() {
-
+        // TODO: Gestionar error con el servidor.
     }
 
     private boolean checkLocationPermission(){

@@ -1,14 +1,14 @@
 package com.jmarser.weatherapp_java.main.interactor;
 
+import com.jmarser.weatherapp_java.api.models.Zona;
+
 public interface WeatherInteractor {
 
-    void getWeatherForCity(String city, OnGetWeatherCallBack callBack);
-
-    void getWeatherForLocation(Long latitude, Long longitude, OnGetWeatherCallBack callBack);
+    void getWeatherFullForLocation(long latitude, long longitude, OnGetWeatherCallBack callBack);
 
     interface OnGetWeatherCallBack{
-        void onSuccessGetWeater();
-        void onErrorGetWeater();
+        void onSuccessGetWeaterFull(Zona zona);
+        void onErrorGetWeaterFull(String message);
         void errorServer();
     }
 }

@@ -15,6 +15,7 @@ import com.jmarser.weatherapp_java.main.presenter.WeatherPresenterImpl;
 import com.jmarser.weatherapp_java.main.view.MainActivity;
 import com.jmarser.weatherapp_java.main.view.MainView;
 import com.jmarser.weatherapp_java.main.view.WeatherFragment;
+import com.jmarser.weatherapp_java.main.view.WeatherView;
 import com.jmarser.weatherapp_java.splash.SplashActivity;
 
 import dagger.Module;
@@ -72,7 +73,7 @@ public class AppModule {
 
     @NonNull
     @Provides
-    public WeatherFragment weatherFragment() {
+    public WeatherView weatherFragment() {
         if(weatherFragment != null){
             return weatherFragment;
         }

@@ -31,6 +31,8 @@
     <string name="humidity">Humedad</string>
     <string name="uvi">Radiación UV.</string>
     <string name="visibility">Visibilidad</string>
+    <string name="temp_min">Temp. min</string>
+    <string name="temp_max">Temp. max</string>
 
 
 </resources>

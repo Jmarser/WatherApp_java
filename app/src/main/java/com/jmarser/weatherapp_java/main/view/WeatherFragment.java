@@ -3,6 +3,8 @@ package com.jmarser.weatherapp_java.main.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +12,34 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.jmarser.weatherapp_java.R;
+import com.jmarser.weatherapp_java.api.models.Hourly;
 import com.jmarser.weatherapp_java.api.models.WeatherBase;
+import com.jmarser.weatherapp_java.api.models.Zona;
 import com.jmarser.weatherapp_java.databinding.FragmentWeatherBinding;
+import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
+import com.jmarser.weatherapp_java.di.appComponent.DaggerAppComponent;
+import com.jmarser.weatherapp_java.di.appModule.AppModule;
+import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
+import com.jmarser.weatherapp_java.main.adapters.HourlyForecastAdapter;
+import com.jmarser.weatherapp_java.main.presenter.WeatherPresenter;
 import com.jmarser.weatherapp_java.utils.Constants;
+import com.jmarser.weatherapp_java.utils.ConversionMethods;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 public class WeatherFragment extends Fragment implements WeatherView{
+
+    @Inject
+    WeatherPresenter weatherPresenter;
 
     private FragmentWeatherBinding binding;
 
     private WeatherBase weatherBase;
+    private Zona zona;
+    private ArrayList<Hourly> forecastList;
+    private HourlyForecastAdapter forecastAdapter;
 
     public WeatherFragment() {
         // Required empty public constructor
@@ -44,11 +65,24 @@ public class WeatherFragment extends Fragment implements WeatherView{
         // Inflate the layout for this fragment
         binding = FragmentWeatherBinding.inflate(inflater, container, false);
 
+        initInjection();
         initListener();
 
-
+        if(weatherBase != null) {
+            weatherPresenter.getWeatherForLocation((long) weatherBase.getCoord().getLat(), (long) weatherBase.getCoord().getLon());
+            binding.pbPrevisiones.setVisibility(View.VISIBLE);
+        }
 
         return binding.getRoot();
+    }
+
+    private void initInjection(){
+        AppComponent appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(getContext(), this))
+                .sharedPreferencesModule(new SharedPreferencesModule(getContext()))
+                .build();
+
+        appComponent.inject(this);
     }
 
     private void initListener() {
@@ -66,5 +100,66 @@ public class WeatherFragment extends Fragment implements WeatherView{
 
     public WeatherBase getWeatherBase() {
         return weatherBase;
+    }
+
+    @Override
+    public void setWeatherFull(Zona zona) {
+        if (zona != null && weatherBase != null){
+            this.zona = zona;
+            renderUI();
+        }
+    }
+
+    @Override
+    public void onErrorMessageWeatherFull(String message) {
+        // TODO: Gestionar el mensaje de error al obtener los datos del servidor
+    }
+
+    @Override
+    public void onErrorWeatherFull() {
+        // TODO: Gestionar el error al obtener los datos del servidor
+    }
+
+    @Override
+    public void ErrorServer() {
+        // TODO: Gestionar error con el servidor
+    }
+
+    private void renderUI(){
+        // Parametros que vienen del objeto WeatherBase
+        binding.tvCiudad.setText(weatherBase.getName() + ", " + weatherBase.getSys().getCountry());
+        binding.tvTempMinActual.setText(ConversionMethods.getTemperature(weatherBase.getMain().getTempMin()));
+        binding.tvTempMaxActual.setText(ConversionMethods.getTemperature(weatherBase.getMain().getTempMax()));
+
+        // Parámetros que vienen del objeto Zona
+        binding.tvTempActual.setText(ConversionMethods.getTemperature(zona.getCurrently().getTemp()));
+        binding.tvDescriptionTempActual.setText(zona.getCurrently().getWeather().get(0).getDescription());
+        binding.tvHoraAmanecer.setText(ConversionMethods.getHora(zona.getCurrently().getSunrise()));
+        binding.tvHoraAnochecer.setText(ConversionMethods.getHora(zona.getCurrently().getSunset()));
+        binding.tvVelViento.setText(ConversionMethods.getWindVelocity(zona.getCurrently().getWindSpeed()));
+        binding.tvDircViento.setText(ConversionMethods.getDegToCompass(zona.getCurrently().getWindDeg()).getDirection());
+        binding.brujula.setImageResource(ConversionMethods.getDegToCompass(zona.getCurrently().getWindDeg()).getImgRessource());
+        binding.tvSensacionTermica.setText(ConversionMethods.getTemperature(zona.getCurrently().getTemp()));
+        binding.tvPresion.setText(ConversionMethods.getPressure(zona.getCurrently().getPressure()));
+        binding.tvHumedad.setText(ConversionMethods.getHumidity(zona.getCurrently().getHumidity()));
+        binding.tvUvi.setText(ConversionMethods.getUvi(zona.getCurrently().getUvi()));
+        binding.tvVisibilidad.setText(ConversionMethods.getVisibility(zona.getCurrently().getVisibility()));
+
+        forecastList = zona.getHourlyZona();
+        renderRecyclerView();
+    }
+
+    private void renderRecyclerView(){
+        binding.pbPrevisiones.setVisibility(View.INVISIBLE);
+        if(forecastList != null && forecastList.size() > 0){
+            binding.rvPronosticoHoras.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            forecastAdapter = new HourlyForecastAdapter(forecastList);
+            binding.rvPronosticoHoras.setAdapter(forecastAdapter);
+            binding.pbPrevisiones.setVisibility(View.INVISIBLE);
+            binding.rvPronosticoHoras.setVisibility(View.VISIBLE);
+        }else{
+            binding.pbPrevisiones.setVisibility(View.VISIBLE);
+            binding.rvPronosticoHoras.setVisibility(View.INVISIBLE);
+        }
     }
 }
