@@ -4,6 +4,12 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.jmarser.weatherapp_java.forecast.interactor.ForecastInteractor;
+import com.jmarser.weatherapp_java.forecast.interactor.ForecastInteractorImpl;
+import com.jmarser.weatherapp_java.forecast.presenter.ForecasrPresenterImpl;
+import com.jmarser.weatherapp_java.forecast.presenter.ForecastPresenter;
+import com.jmarser.weatherapp_java.forecast.view.ForecastActivity;
+import com.jmarser.weatherapp_java.forecast.view.ForecastView;
 import com.jmarser.weatherapp_java.main.interactor.MainInteractor;
 import com.jmarser.weatherapp_java.main.interactor.MainInteractorImpl;
 import com.jmarser.weatherapp_java.main.interactor.WeatherInteractor;
@@ -29,6 +35,7 @@ public class AppModule {
     private SplashActivity splashActivity;
     private MainActivity mainActivity;
     private WeatherFragment weatherFragment;
+    private ForecastActivity forecastActivity;
 
 
 
@@ -50,6 +57,11 @@ public class AppModule {
     public AppModule(Context context, WeatherFragment weatherFragment) {
         this.context = context;
         this.weatherFragment = weatherFragment;
+    }
+
+    public AppModule(Context context, ForecastActivity forecastActivity) {
+        this.context = context;
+        this.forecastActivity = forecastActivity;
     }
 
     /* Views */
@@ -80,6 +92,15 @@ public class AppModule {
         return null;
     }
 
+    @NonNull
+    @Provides
+    public ForecastView forecastActivity() {
+        if(forecastActivity != null){
+            return forecastActivity;
+        }
+        return null;
+    }
+
 
     /* Presenters */
 
@@ -90,6 +111,11 @@ public class AppModule {
 
     @Provides
     public WeatherPresenter providerWeatherPresent(WeatherPresenterImpl presenter){
+        return presenter;
+    }
+
+    @Provides
+    public ForecastPresenter providerForecastPresenter(ForecasrPresenterImpl presenter){
         return presenter;
     }
 
@@ -106,6 +132,10 @@ public class AppModule {
         return interactor;
     }
 
+    @Provides
+    public ForecastInteractor providerForecastInteractor(ForecastInteractorImpl interactor){
+        return interactor;
+    }
 
 
 }

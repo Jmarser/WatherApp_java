@@ -1,17 +1,15 @@
 package com.jmarser.weatherapp_java.main.view;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.jmarser.weatherapp_java.R;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.jmarser.weatherapp_java.api.models.Hourly;
 import com.jmarser.weatherapp_java.api.models.WeatherBase;
 import com.jmarser.weatherapp_java.api.models.Zona;
@@ -20,6 +18,7 @@ import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
 import com.jmarser.weatherapp_java.di.appComponent.DaggerAppComponent;
 import com.jmarser.weatherapp_java.di.appModule.AppModule;
 import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
+import com.jmarser.weatherapp_java.forecast.view.ForecastActivity;
 import com.jmarser.weatherapp_java.main.adapters.HourlyForecastAdapter;
 import com.jmarser.weatherapp_java.main.presenter.WeatherPresenter;
 import com.jmarser.weatherapp_java.utils.Constants;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class WeatherFragment extends Fragment implements WeatherView{
+public class WeatherFragment extends Fragment implements WeatherView {
 
     @Inject
     WeatherPresenter weatherPresenter;
@@ -40,6 +39,7 @@ public class WeatherFragment extends Fragment implements WeatherView{
     private Zona zona;
     private ArrayList<Hourly> forecastList;
     private HourlyForecastAdapter forecastAdapter;
+
 
     public WeatherFragment() {
         // Required empty public constructor
@@ -68,7 +68,7 @@ public class WeatherFragment extends Fragment implements WeatherView{
         initInjection();
         initListener();
 
-        if(weatherBase != null) {
+        if (weatherBase != null) {
             weatherPresenter.getWeatherForLocation((long) weatherBase.getCoord().getLat(), (long) weatherBase.getCoord().getLon());
             binding.pbPrevisiones.setVisibility(View.VISIBLE);
         }
@@ -76,7 +76,7 @@ public class WeatherFragment extends Fragment implements WeatherView{
         return binding.getRoot();
     }
 
-    private void initInjection(){
+    private void initInjection() {
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(getContext(), this))
                 .sharedPreferencesModule(new SharedPreferencesModule(getContext()))
@@ -86,15 +86,24 @@ public class WeatherFragment extends Fragment implements WeatherView{
     }
 
     private void initListener() {
-        binding.btnPronosticoDias.setOnClickListener(view -> showMessage());
+        binding.btnPronosticoDias.setOnClickListener(view -> goToForecast());
+    }
+
+    private void goToForecast() {
+        Intent intent = new Intent(getContext(), ForecastActivity.class);
+        intent.putExtra(Constants.LONGITUD, zona.getLongitud());
+        intent.putExtra(Constants.LATITUD, zona.getLatitud());
+        startActivity(intent);
     }
 
     private void showMessage() {
         Toast.makeText(getContext(), "Nuevo mensaje desde el fragment", Toast.LENGTH_SHORT).show();
     }
 
-    /** Métodos para establecer y obtener el objeto WeatherBase */
-    public void setWeatherBase(WeatherBase weatherBase){
+    /**
+     * Métodos para establecer y obtener el objeto WeatherBase
+     */
+    public void setWeatherBase(WeatherBase weatherBase) {
         this.weatherBase = weatherBase;
     }
 
@@ -104,7 +113,7 @@ public class WeatherFragment extends Fragment implements WeatherView{
 
     @Override
     public void setWeatherFull(Zona zona) {
-        if (zona != null && weatherBase != null){
+        if (zona != null && weatherBase != null) {
             this.zona = zona;
             renderUI();
         }
@@ -125,7 +134,7 @@ public class WeatherFragment extends Fragment implements WeatherView{
         // TODO: Gestionar error con el servidor
     }
 
-    private void renderUI(){
+    private void renderUI() {
         // Parametros que vienen del objeto WeatherBase
         binding.tvCiudad.setText(weatherBase.getName() + ", " + weatherBase.getSys().getCountry());
         binding.tvTempMinActual.setText(ConversionMethods.getTemperature(weatherBase.getMain().getTempMin()));
@@ -149,15 +158,15 @@ public class WeatherFragment extends Fragment implements WeatherView{
         renderRecyclerView();
     }
 
-    private void renderRecyclerView(){
+    private void renderRecyclerView() {
         binding.pbPrevisiones.setVisibility(View.INVISIBLE);
-        if(forecastList != null && forecastList.size() > 0){
+        if (forecastList != null && forecastList.size() > 0) {
             binding.rvPronosticoHoras.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             forecastAdapter = new HourlyForecastAdapter(forecastList);
             binding.rvPronosticoHoras.setAdapter(forecastAdapter);
             binding.pbPrevisiones.setVisibility(View.INVISIBLE);
             binding.rvPronosticoHoras.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             binding.pbPrevisiones.setVisibility(View.VISIBLE);
             binding.rvPronosticoHoras.setVisibility(View.INVISIBLE);
         }

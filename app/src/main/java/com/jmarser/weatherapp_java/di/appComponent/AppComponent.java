@@ -2,6 +2,7 @@ package com.jmarser.weatherapp_java.di.appComponent;
 
 import com.jmarser.weatherapp_java.di.appModule.AppModule;
 import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
+import com.jmarser.weatherapp_java.forecast.view.ForecastActivity;
 import com.jmarser.weatherapp_java.main.view.MainActivity;
 import com.jmarser.weatherapp_java.main.view.WeatherFragment;
 import com.jmarser.weatherapp_java.splash.SplashActivity;
@@ -15,7 +16,10 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(SplashActivity splashActivity);
+
     void inject(MainActivity mainActivity);
 
     void inject(WeatherFragment weatherFragment);
+
+    void inject(ForecastActivity forecastActivity);
 }

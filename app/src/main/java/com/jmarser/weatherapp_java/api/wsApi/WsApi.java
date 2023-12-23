@@ -1,8 +1,11 @@
 package com.jmarser.weatherapp_java.api.wsApi;
 
+import com.jmarser.weatherapp_java.api.models.Daily;
 import com.jmarser.weatherapp_java.api.models.WeatherBase;
 import com.jmarser.weatherapp_java.api.models.Zona;
 import com.jmarser.weatherapp_java.utils.Constants;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -21,4 +24,7 @@ public interface WsApi {
 
     @GET(Constants.CALL_WEATHER_FULL)
     Call<Zona> getWeatherFullForLocation(@Query("lat")double lat, @Query("lon") double lon, @Query("units") String units, @Query("lang") String lang, @Query("appid") String api_key);
+
+    @GET(Constants.CALL_WEATHER_FULL)
+    Call<Zona> getForecast(@Query("lat")double lat, @Query("lon") double lon, @Query("units") String units, @Query("lang") String lang, @Query("appid") String api_key);
 }

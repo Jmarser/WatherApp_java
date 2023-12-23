@@ -13,4 +13,7 @@ public class Constants {
     public static final String CALL_WEATHER_BASE = SERVER_URL_BASE + "" + WEATHER_ACTUAL_BASE;
     public static final String CALL_WEATHER_FULL = SERVER_URL_FULL + "" + WEATHER_ACTUAL_FULL;
 
+    public static final String LONGITUD = "longitud";
+    public static final String LATITUD = "latitud";
+
 }
