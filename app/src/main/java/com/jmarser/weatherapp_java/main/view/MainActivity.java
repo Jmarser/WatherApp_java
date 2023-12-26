@@ -3,6 +3,7 @@ package com.jmarser.weatherapp_java.main.view;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -26,7 +27,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jmarser.weatherapp_java.R;
+import com.jmarser.weatherapp_java.api.models.DatosCiudad;
 import com.jmarser.weatherapp_java.api.models.WeatherBase;
 import com.jmarser.weatherapp_java.databinding.ActivityMainBinding;
 import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
@@ -35,13 +39,20 @@ import com.jmarser.weatherapp_java.di.appModule.AppModule;
 import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
 import com.jmarser.weatherapp_java.main.adapters.FragmentPagerAdapter;
 import com.jmarser.weatherapp_java.main.presenter.MainPresenter;
+import com.jmarser.weatherapp_java.utils.Constants;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, MainView {
+
+    @Inject
+    SharedPreferences sharedPreferences;
 
     @Inject
     MainPresenter presenter;
@@ -51,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private FragmentPagerAdapter pagerAdapter;
     private static final int PERMISSION_LOCATION = 123;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private Set<DatosCiudad> ciudades = new HashSet<DatosCiudad>();
+    private Gson gson = new Gson();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +78,21 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         //fragmentList = new ArrayList<Fragment>();
         pagerAdapter = new FragmentPagerAdapter(this, fragmentList);
         binding.vpFragment.setAdapter(pagerAdapter);
-        renderView();
 
-//        new TabLayoutMediator(binding.tabDots, binding.vpFragment, ((tab, position) -> tab.setText("Ciudad " + (position + 1)))).attach();
+        // Recuperamos las ciudades que tengamos almacenadas
+        String ciudadesRecuperadas = sharedPreferences.getString(Constants.CIUDADES_SHARED, null);
+
+        if (ciudadesRecuperadas != null){
+            // si tenemos datos los convertimos en un set
+            Type type = new TypeToken<Set<DatosCiudad>>(){}.getType();
+            ciudades = gson.fromJson(ciudadesRecuperadas, type);
+            for (DatosCiudad ciudad : ciudades) {
+                presenter.getWeatherBaseForCity(ciudad.getNombre());
+            }
+        }else{
+            Toast.makeText(this, "No hay ciudades almacenadas", Toast.LENGTH_LONG).show();
+        }
+        renderView();
 
     }
 
@@ -99,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             // Permiso no concedido
             requestLocationPermission();
         }
-
     }
 
     private void obtenerUbicacion() {
