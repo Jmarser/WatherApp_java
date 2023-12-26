@@ -22,6 +22,9 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     private List<Daily> dailyList;
 
     public ForecastAdapter(List<Daily> dailyList) {
+        if (dailyList != null && dailyList.size() > 0) {
+            dailyList.remove(0);
+        }
         this.dailyList = dailyList;
     }
 

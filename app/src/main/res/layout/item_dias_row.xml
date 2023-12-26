@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/glass_morphing_with_stroke"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:id="@+id/row_day">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
