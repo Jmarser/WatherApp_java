@@ -11,6 +11,7 @@
 
     <!-- TODO: textos de prueba -->
     <string name="city_prueba">Ciudad</string>
+    <string name="date_prueba">Miércoles, 22:50</string>
     <string name="temp_prueba">32ºC</string>
     <string name="description_prueba">Descripción de prueba</string>
     <string name="hora_prueba">22:50</string>
@@ -36,6 +37,30 @@
     <string name="temp_max">Temp. max</string>
     <string name="forecast">PRONÓSTICO</string>
     <string name="summary">Expect a day of partly cloudy with rain</string>
+
+    <!-- TODO: Días de la semana -->
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miércoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+    <string name="undefined">sin datos</string>
+
+    <!-- TODO: Meses del año -->
+    <string name="january">Enero</string>
+    <string name="february">Febrero</string>
+    <string name="march">Marzo</string>
+    <string name="april">Abril</string>
+    <string name="may">Mayo</string>
+    <string name="june">Junio</string>
+    <string name="july">Julio</string>
+    <string name="august">Agosto</string>
+    <string name="september">Septiembre</string>
+    <string name="october">Octubre</string>
+    <string name="november">Noviembre</string>
+    <string name="december">Diciembre</string>
 
 
 </resources>

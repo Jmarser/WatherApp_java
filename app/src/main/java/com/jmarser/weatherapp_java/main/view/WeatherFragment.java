@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.jmarser.weatherapp_java.api.models.Hourly;
 import com.jmarser.weatherapp_java.api.models.WeatherBase;
 import com.jmarser.weatherapp_java.api.models.Zona;
@@ -135,7 +136,11 @@ public class WeatherFragment extends Fragment implements WeatherView {
     }
 
     private void renderUI() {
+
+        binding.tvDateCurrent.setText(ConversionMethods.getCurrentDayAndTime(binding.getRoot().getContext()));
+
         // Parametros que vienen del objeto WeatherBase
+        Glide.with(binding.getRoot().getContext()).load(ConversionMethods.getIcon(weatherBase.getWeather().get(0).getIcon())).into(binding.imgTempActual);
         binding.tvCiudad.setText(weatherBase.getName() + ", " + weatherBase.getSys().getCountry());
         binding.tvTempMinActual.setText(ConversionMethods.getTemperature(weatherBase.getMain().getTempMin()));
         binding.tvTempMaxActual.setText(ConversionMethods.getTemperature(weatherBase.getMain().getTempMax()));

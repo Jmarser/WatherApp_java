@@ -17,6 +17,7 @@ import com.jmarser.weatherapp_java.forecast.presenter.ForecastPresenter;
 import com.jmarser.weatherapp_java.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,6 +40,7 @@ public class ForecastActivity extends AppCompatActivity implements ForecastView{
         setContentView(binding.getRoot());
 
         initInjection();
+        initListeners();
 
         Long longitud = getIntent().getLongExtra(Constants.LONGITUD, 0);
         Long latitud = getIntent().getLongExtra(Constants.LATITUD, 0);
@@ -55,6 +57,10 @@ public class ForecastActivity extends AppCompatActivity implements ForecastView{
                 .build();
 
         appComponent.inject(this);
+    }
+
+    private void initListeners(){
+        binding.imgBack.setOnClickListener(view -> onBackPressed());
     }
 
     private void renderRecyclerForecast() {
