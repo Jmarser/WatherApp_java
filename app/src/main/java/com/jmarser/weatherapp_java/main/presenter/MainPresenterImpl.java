@@ -58,7 +58,8 @@ public class MainPresenterImpl implements MainPresenter, MainInteractor.OnGetWea
             ciudades = new HashSet<>();;
         }
 
-        ciudades.add(new DatosCiudad(weatherBase.getName(), (float) weatherBase.getCoord().getLat(), (float) weatherBase.getCoord().getLon()));
+        String nombreCiudad = weatherBase.getName() + ", " + weatherBase.getSys().getCountry();
+        ciudades.add(new DatosCiudad(nombreCiudad, weatherBase.getCoord().getLat(), weatherBase.getCoord().getLon()));
         String json = gson.toJson(ciudades);
         Log.i("CIUDADES", json);
         sharedPreferences.edit().putString(Constants.CIUDADES_SHARED, json).apply();

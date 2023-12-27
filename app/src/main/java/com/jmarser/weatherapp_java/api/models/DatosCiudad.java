@@ -84,19 +84,20 @@ public class DatosCiudad implements Parcelable {
         }
     };
 
-    /** Métodos para comparar objetos de esta clase **/
+    /** Métodos para comparar objetos de esta clase, los comparamos por el nombre porque las coordenadas pueden variar y tendríamos repetidos en el array **/
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         DatosCiudad otraCiudad = (DatosCiudad) obj;
-        return Objects.equals(nombre, otraCiudad.nombre) &&
+/*        return Objects.equals(nombre, otraCiudad.nombre) &&
                 Objects.equals(latitud, otraCiudad.latitud) &&
-                Objects.equals(longitud, otraCiudad.longitud);
+                Objects.equals(longitud, otraCiudad.longitud);*/
+        return Objects.equals(nombre, otraCiudad.nombre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, latitud, longitud);
+        return Objects.hash(nombre);
     }
 }

@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -107,12 +108,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void initListeners() {
         binding.btnLocation.setOnClickListener(view -> addNewFragment());
-        binding.btnMenu.setOnClickListener(view -> deleteList());
+        binding.btnMenu.setOnClickListener(view -> goToMenu());
         binding.svCity.setOnQueryTextListener(this);
     }
 
-    private void showMessage(View view) {
-        Toast.makeText(this, "Nuevo mensaje", Toast.LENGTH_SHORT).show();
+
+    private void ToastMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void addNewFragment() {
@@ -149,6 +151,31 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.error_getlocation), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    private void goToMenu(){
+        PopupMenu popup = new PopupMenu(this, binding.btnMenu);
+        popup.inflate(R.menu.menu_popup);
+        popup.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.menu_ciudades) {
+                ToastMessage("Gestión de ciudades");
+                return true;
+            }
+
+            if (itemId == R.id.menu_settings) {
+                ToastMessage("Ajustes");
+                return true;
+            }
+
+            if (itemId == R.id.menu_info) {
+                ToastMessage("Info");
+                return true;
+            }
+            return false;
+        });
+        popup.show();
     }
 
     private void deleteList(){

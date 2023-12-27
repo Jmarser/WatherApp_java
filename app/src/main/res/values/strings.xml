@@ -8,6 +8,9 @@
     <string name="ajustes">Ajustes</string>
     <string name="cancel">Cancelar</string>
     <string name="error_getlocation">Error al obtener la posición del dispositivo</string>
+    <string name="menu_cities">Ciudades</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="menu_info">Info</string>
 
     <!-- TODO: textos de prueba -->
     <string name="city_prueba">Ciudad</string>
