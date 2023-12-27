@@ -4,7 +4,7 @@ import com.jmarser.weatherapp_java.api.models.Zona;
 
 public interface WeatherInteractor {
 
-    void getWeatherFullForLocation(long latitude, long longitude, OnGetWeatherCallBack callBack);
+    void getWeatherFullForLocation(double latitude, double longitude, OnGetWeatherCallBack callBack);
 
     interface OnGetWeatherCallBack{
         void onSuccessGetWeaterFull(Zona zona);

@@ -12,13 +12,13 @@ public class DatosCiudad implements Parcelable {
     /** Propiedades **/
 
     private String nombre;
-    private float latitud;
-    private float longitud;
+    private double latitud;
+    private double longitud;
 
 
     /** Constructor **/
 
-    public DatosCiudad(String nombre, float latitud, float longitud) {
+    public DatosCiudad(String nombre, double latitud, double longitud) {
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -35,19 +35,19 @@ public class DatosCiudad implements Parcelable {
         this.nombre = nombre;
     }
 
-    public float getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(float latitud) {
+    public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
-    public float getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(float longitud) {
+    public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
@@ -56,15 +56,15 @@ public class DatosCiudad implements Parcelable {
 
     protected DatosCiudad(Parcel in) {
         this.nombre = in.readString();
-        this.longitud = in.readFloat();
-        this.latitud = in.readFloat();
+        this.longitud = in.readDouble();
+        this.latitud = in.readDouble();
     }
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(nombre);
-        parcel.writeFloat(longitud);
-        parcel.writeFloat(latitud);
+        parcel.writeDouble(longitud);
+        parcel.writeDouble(latitud);
     }
 
     @Override

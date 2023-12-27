@@ -19,7 +19,7 @@ public class WeatherPresenterImpl implements WeatherPresenter, WeatherInteractor
     }
 
     @Override
-    public void getWeatherForLocation(long latitude, long longitude) {
+    public void getWeatherForLocation(double latitude, double longitude) {
         weatherInteractor.getWeatherFullForLocation(latitude, longitude, this);
     }
 

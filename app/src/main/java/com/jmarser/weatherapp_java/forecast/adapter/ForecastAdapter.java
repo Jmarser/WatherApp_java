@@ -60,6 +60,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
             binding.tvDiaPronostico.setText(day +", " + ConversionMethods.getHora(daily.getDt()));
             binding.tvSummaryPronostico.setText(daily.getSummary());
             binding.tvTempMin.setText(ConversionMethods.getTemperature(daily.getTemp().getMin()));
+            Log.i("TEMPERATURAS", "MIN: " + daily.getTemp().getMin() + " / " +ConversionMethods.getTemperature(daily.getTemp().getMin()) + ",MAX: " + ConversionMethods.getTemperature(daily.getTemp().getMax()));
             binding.tvTempMax.setText(ConversionMethods.getTemperature(daily.getTemp().getMax()));
             binding.tvTempDescriptionForecast.setText(daily.getWeather().get(0).getDescription());
             Glide.with(binding.getRoot().getContext()).load(ConversionMethods.getIcon(daily.getWeather().get(0).getIcon())).into(binding.imgIconForecast);

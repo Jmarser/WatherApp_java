@@ -23,7 +23,7 @@ public class WeatherInteractorImpl implements WeatherInteractor{
 
 
     @Override
-    public void getWeatherFullForLocation(long latitude, long longitude, OnGetWeatherCallBack callBack) {
+    public void getWeatherFullForLocation(double latitude, double longitude, OnGetWeatherCallBack callBack) {
         wsApi.getWeatherFullForLocation(latitude, longitude, "metric", "es", Constants.API_KEY_FULL).enqueue(new Callback<Zona>() {
             @Override
             public void onResponse(Call<Zona> call, Response<Zona> response) {

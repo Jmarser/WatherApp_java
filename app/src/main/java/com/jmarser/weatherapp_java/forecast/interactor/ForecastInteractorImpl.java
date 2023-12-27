@@ -23,7 +23,7 @@ public class ForecastInteractorImpl implements ForecastInteractor {
     }
 
     @Override
-    public void getForecast(Long lat, Long lon, OnGetForecast callBack) {
+    public void getForecast(double lat, double lon, OnGetForecast callBack) {
         wsApi.getForecast(lat, lon, "metric", "es", Constants.API_KEY_FULL).enqueue(new Callback<Zona>() {
             @Override
             public void onResponse(Call<Zona> call, Response<Zona> response) {

@@ -70,7 +70,7 @@ public class WeatherFragment extends Fragment implements WeatherView {
         initListener();
 
         if (weatherBase != null) {
-            weatherPresenter.getWeatherForLocation((long) weatherBase.getCoord().getLat(), (long) weatherBase.getCoord().getLon());
+            weatherPresenter.getWeatherForLocation(weatherBase.getCoord().getLat(), weatherBase.getCoord().getLon());
             binding.pbPrevisiones.setVisibility(View.VISIBLE);
         }
 

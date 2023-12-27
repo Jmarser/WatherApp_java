@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ForecastInteractor {
 
-    void getForecast(Long lat, Long lon, OnGetForecast callBack);
+    void getForecast(double lat, double lon, OnGetForecast callBack);
 
     interface OnGetForecast{
         void onSuccessGetForecast(List<Daily> forecast);

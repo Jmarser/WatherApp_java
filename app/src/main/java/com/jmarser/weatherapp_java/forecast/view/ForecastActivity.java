@@ -1,6 +1,7 @@
 package com.jmarser.weatherapp_java.forecast.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,8 +43,8 @@ public class ForecastActivity extends AppCompatActivity implements ForecastView{
         initInjection();
         initListeners();
 
-        Long longitud = getIntent().getLongExtra(Constants.LONGITUD, 0);
-        Long latitud = getIntent().getLongExtra(Constants.LATITUD, 0);
+        double longitud = getIntent().getDoubleExtra(Constants.LONGITUD, 0);
+        double latitud = getIntent().getDoubleExtra(Constants.LATITUD, 0);
         presenter.getForecast(latitud, longitud);
 
         renderRecyclerForecast();

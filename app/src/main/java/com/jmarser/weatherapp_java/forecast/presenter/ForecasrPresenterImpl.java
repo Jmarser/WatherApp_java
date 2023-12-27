@@ -21,7 +21,7 @@ public class ForecasrPresenterImpl implements ForecastPresenter, ForecastInterac
     }
 
     @Override
-    public void getForecast(Long lat, Long lon) {
+    public void getForecast(double lat, double lon) {
         interactor.getForecast(lat, lon, this);
     }
 
