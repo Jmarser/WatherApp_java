@@ -39,7 +39,7 @@ public class MainPresenterImpl implements MainPresenter, MainInteractor.OnGetWea
     }
 
     @Override
-    public void getWeatherBaseForLocation(Long lat, Long lon) {
+    public void getWeatherBaseForLocation(float lat, float lon) {
         mainInteractor.getWeatherBaseForLocation(lat, lon, this);
     }
 

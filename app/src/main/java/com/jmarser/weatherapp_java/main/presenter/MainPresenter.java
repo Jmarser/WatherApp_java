@@ -4,5 +4,5 @@ public interface MainPresenter {
 
     void getWeatherBaseForCity(String city);
 
-    void getWeatherBaseForLocation(Long lat, Long lon);
+    void getWeatherBaseForLocation(float lat, float lon);
 }

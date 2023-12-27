@@ -41,7 +41,7 @@ public class MainInteractorImpl implements MainInteractor{
     }
 
     @Override
-    public void getWeatherBaseForLocation(Long latitude, Long longitude, OnGetWeatherBaseCallBack callBack) {
+    public void getWeatherBaseForLocation(float latitude, float longitude, OnGetWeatherBaseCallBack callBack) {
         wsApi.getWeatherBaseForLocation(latitude, longitude, "metric", "es", Constants.API_KEY_BASE).enqueue(new Callback<WeatherBase>() {
             @Override
             public void onResponse(Call<WeatherBase> call, Response<WeatherBase> response) {

@@ -6,7 +6,7 @@ public interface MainInteractor {
 
     void getWeatherBaseForCity(String city, OnGetWeatherBaseCallBack callBack);
 
-    void getWeatherBaseForLocation(Long latitude, Long longitude, OnGetWeatherBaseCallBack callBack);
+    void getWeatherBaseForLocation(float latitude, float longitude, OnGetWeatherBaseCallBack callBack);
 
     interface OnGetWeatherBaseCallBack{
         void onSuccessGetWeatherBase(WeatherBase weatherBase);

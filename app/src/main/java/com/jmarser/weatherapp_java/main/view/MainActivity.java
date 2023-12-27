@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         if(location != null){
                             Log.i("LOCATION", "Latitud: " + location.getLatitude() + " / Longitud: " + location.getLongitude());
                             // Si tenemos la localización solicitamos la información al servidor
-                            presenter.getWeatherBaseForLocation((long) location.getLatitude(), (long) location.getLongitude());
+                            presenter.getWeatherBaseForLocation((float) location.getLatitude(), (float) location.getLongitude());
                         }
                     }
                 })

@@ -10,29 +10,29 @@ import com.google.gson.annotations.SerializedName;
 public class Coord implements Parcelable {
 
 	@SerializedName("lon")
-	private double lon;
+	private float lon;
 
 	@SerializedName("lat")
-	private double lat;
+	private float lat;
 
-	public Coord(double lon, double lat) {
+	public Coord(float lon, float lat) {
 		this.lon = lon;
 		this.lat = lat;
 	}
 
-	public double getLon(){
+	public float getLon(){
 		return lon;
 	}
 
-	public double getLat(){
+	public float getLat(){
 		return lat;
 	}
 
-	public void setLon(double lon) {
+	public void setLon(float lon) {
 		this.lon = lon;
 	}
 
-	public void setLat(double lat) {
+	public void setLat(float lat) {
 		this.lat = lat;
 	}
 
@@ -43,13 +43,13 @@ public class Coord implements Parcelable {
 
 	@Override
 	public void writeToParcel(@NonNull Parcel parcel, int i) {
-		parcel.writeDouble(lon);
-		parcel.writeDouble(lat);
+		parcel.writeFloat(lon);
+		parcel.writeFloat(lat);
 	}
 
 	protected Coord(Parcel in) {
-		lon = in.readDouble();
-		lat = in.readDouble();
+		lon = in.readFloat();
+		lat = in.readFloat();
 	}
 
 	public static final Creator<Coord> CREATOR = new Creator<Coord>() {
