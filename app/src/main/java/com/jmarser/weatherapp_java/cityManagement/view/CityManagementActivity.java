@@ -108,5 +108,10 @@ public class CityManagementActivity extends AppCompatActivity implements CitiesA
         listadoCiudades.remove(position);
         citiesAdapter.notifyDataSetChanged();
         saveChangeOfCities();
+        if(citiesAdapter.getItemCount() > 0){
+            showRecyclerCities();
+        }else{
+            showMessageEmptyCities();
+        }
     }
 }

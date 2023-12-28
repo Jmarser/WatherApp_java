@@ -77,24 +77,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         initInjection();
         initListeners();
 
-        //fragmentList = new ArrayList<Fragment>();
+        fragmentList = new ArrayList<Fragment>();
         pagerAdapter = new FragmentPagerAdapter(this, fragmentList);
         binding.vpFragment.setAdapter(pagerAdapter);
 
-        // Recuperamos las ciudades que tengamos almacenadas
-        String ciudadesRecuperadas = sharedPreferences.getString(Constants.CIUDADES_SHARED, null);
-
-        if (ciudadesRecuperadas != null){
-            // si tenemos datos los convertimos en un set
-            Type type = new TypeToken<Set<DatosCiudad>>(){}.getType();
-            ciudades = gson.fromJson(ciudadesRecuperadas, type);
-            for (DatosCiudad ciudad : ciudades) {
-                presenter.getWeatherBaseForCity(ciudad.getNombre());
-            }
-        }else{
-            Toast.makeText(this, "No hay ciudades almacenadas", Toast.LENGTH_LONG).show();
-        }
-        renderView();
+//        getDataSharedPreferences();
+//        renderView();
 
     }
 
@@ -113,6 +101,20 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         binding.svCity.setOnQueryTextListener(this);
     }
 
+    private void getDataSharedPreferences() {
+        // Recuperamos las ciudades que tengamos almacenadas
+        String ciudadesRecuperadas = sharedPreferences.getString(Constants.CIUDADES_SHARED, null);
+
+        if (ciudadesRecuperadas != null){
+            // si tenemos datos los convertimos en un set
+            Type type = new TypeToken<Set<DatosCiudad>>(){}.getType();
+            ciudades = gson.fromJson(ciudadesRecuperadas, type);
+
+            for (DatosCiudad ciudad : ciudades) {
+                presenter.getWeatherBaseForCity(ciudad.getNombre());
+            }
+        }
+    }
 
     private void ToastMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -132,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void obtenerUbicacion() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
             return;
         }
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -180,12 +181,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         popup.show();
     }
 
-    private void deleteList(){
-        fragmentList.clear();
-        pagerAdapter.deleteList();
-        renderView();
-    }
-
     private void renderView(){
         if(pagerAdapter.getItemCount() == 0){
             binding.tvCityEmpty.setVisibility(View.VISIBLE);
@@ -214,7 +209,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public void setWeatherBase(WeatherBase weatherBase) {
-
         if(fragmentList == null){
             fragmentList = new ArrayList<>();
         }
@@ -222,7 +216,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         fragmentList.add(weatherFragment);
         weatherFragment.setWeatherBase(weatherBase);
         pagerAdapter.updateList(fragmentList);
-        pagerAdapter.notifyDataSetChanged();
         renderView();
 
         new TabLayoutMediator(binding.tabDots, binding.vpFragment, (((tab, position) -> {
@@ -276,6 +269,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 showPermissionDeniedDialog();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (pagerAdapter != null) {
+            pagerAdapter.deleteList();
+            getDataSharedPreferences();
+        }
+        renderView();
     }
 
     private void showPermissionDeniedDialog(){

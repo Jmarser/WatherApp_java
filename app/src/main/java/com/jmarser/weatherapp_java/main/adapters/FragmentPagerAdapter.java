@@ -29,6 +29,7 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
 
     public void updateList(List<Fragment> fragments) {
         fragmentList = fragments;
+        notifyDataSetChanged();
     }
 
     public void deleteList(){
