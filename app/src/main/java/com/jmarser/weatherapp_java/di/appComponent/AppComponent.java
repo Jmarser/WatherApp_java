@@ -1,5 +1,6 @@
 package com.jmarser.weatherapp_java.di.appComponent;
 
+import com.jmarser.weatherapp_java.cityManagement.view.CityManagementActivity;
 import com.jmarser.weatherapp_java.di.appModule.AppModule;
 import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
 import com.jmarser.weatherapp_java.forecast.view.ForecastActivity;
@@ -22,4 +23,6 @@ public interface AppComponent {
     void inject(WeatherFragment weatherFragment);
 
     void inject(ForecastActivity forecastActivity);
+
+    void inject(CityManagementActivity cityManagementActivity);
 }

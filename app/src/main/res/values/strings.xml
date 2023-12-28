@@ -25,6 +25,7 @@
     <string name="uvi_prueba">10</string>
     <string name="visibility_prueba">10km</string>
     <string name="dia">Día prueba, 22:30</string>
+    <string name="coord_prueba">12,235689</string>
 
     <!-- TODO: textos fragment weather -->
     <string name="pronostico_horas">Previsión prox. horas</string>

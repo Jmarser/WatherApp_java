@@ -33,6 +33,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jmarser.weatherapp_java.R;
 import com.jmarser.weatherapp_java.api.models.DatosCiudad;
 import com.jmarser.weatherapp_java.api.models.WeatherBase;
+import com.jmarser.weatherapp_java.cityManagement.view.CityManagementActivity;
 import com.jmarser.weatherapp_java.databinding.ActivityMainBinding;
 import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
 import com.jmarser.weatherapp_java.di.appComponent.DaggerAppComponent;
@@ -161,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
             if (itemId == R.id.menu_ciudades) {
                 ToastMessage("Gestión de ciudades");
+                startActivity(new Intent(MainActivity.this, CityManagementActivity.class));
                 return true;
             }
 

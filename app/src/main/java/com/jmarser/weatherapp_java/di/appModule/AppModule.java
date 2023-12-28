@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.jmarser.weatherapp_java.cityManagement.view.CityManagementActivity;
 import com.jmarser.weatherapp_java.forecast.interactor.ForecastInteractor;
 import com.jmarser.weatherapp_java.forecast.interactor.ForecastInteractorImpl;
 import com.jmarser.weatherapp_java.forecast.presenter.ForecasrPresenterImpl;
@@ -36,6 +37,7 @@ public class AppModule {
     private MainActivity mainActivity;
     private WeatherFragment weatherFragment;
     private ForecastActivity forecastActivity;
+    private CityManagementActivity cityManagementActivity;
 
 
 
@@ -62,6 +64,11 @@ public class AppModule {
     public AppModule(Context context, ForecastActivity forecastActivity) {
         this.context = context;
         this.forecastActivity = forecastActivity;
+    }
+
+    public AppModule(Context context, CityManagementActivity cityManagementActivity) {
+        this.context = context;
+        this.cityManagementActivity = cityManagementActivity;
     }
 
     /* Views */
@@ -101,6 +108,14 @@ public class AppModule {
         return null;
     }
 
+    @NonNull
+    @Provides
+    public CityManagementActivity cityManagementActivity() {
+        if(cityManagementActivity != null){
+            return cityManagementActivity;
+        }
+        return null;
+    }
 
     /* Presenters */
 
