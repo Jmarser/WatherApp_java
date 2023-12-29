@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         binding.btnLocation.setOnClickListener(view -> addNewFragment());
         binding.btnMenu.setOnClickListener(view -> goToMenu());
         binding.svCity.setOnQueryTextListener(this);
+        binding.srlMain.setOnRefreshListener(() -> refreshView());
     }
 
     /* Obtenemos las ciudades almacenadas en la sharedpreferences */
@@ -304,6 +305,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             getDataSharedPreferences();
         }
         renderView();
+    }
+
+    /* Método con el que gestionamos el pullRefresh para recargar la vista */
+    private void refreshView(){
+        if (pagerAdapter != null) {
+            pagerAdapter.deleteList();
+            getDataSharedPreferences();
+        }
+        renderView();
+        binding.srlMain.setRefreshing(false);
     }
 
     private void showPermissionDeniedDialog(){
