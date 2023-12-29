@@ -68,7 +68,7 @@ public class CityManagementActivity extends AppCompatActivity implements CitiesA
     }
 
     private void initListeners(){
-        binding.btnBackCities.setOnClickListener(view -> onBackPressed());
+        binding.btnBackCities.setOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
     }
 
     private void renderRecyclerCities(){

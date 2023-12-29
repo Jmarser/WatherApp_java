@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         binding.svCity.setOnQueryTextListener(this);
     }
 
+    /* Obtenemos las ciudades almacenadas en la sharedpreferences */
     private void getDataSharedPreferences() {
         // Recuperamos las ciudades que tengamos almacenadas
         String ciudadesRecuperadas = sharedPreferences.getString(Constants.CIUDADES_SHARED, null);
@@ -159,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 });
     }
 
+    /* Método que gestiona el menú popup */
     private void goToMenu(){
         PopupMenu popup = new PopupMenu(this, binding.btnMenu);
         popup.inflate(R.menu.menu_popup);
@@ -185,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         popup.show();
     }
 
+    /* Mostramos/ocultamos el mensaje de no hay ciudades */
     private void renderView(){
         if(pagerAdapter.getItemCount() == 0){
             binding.tvCityEmpty.setVisibility(View.VISIBLE);
@@ -195,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        // Realizamos la busqueda al pulsar sobre buscar
         if(!TextUtils.isEmpty(query)){
             presenter.getWeatherBaseForCity(query);
             hideKeyboard();
@@ -221,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (checkFragmentExist(weatherBase)){
             ToastMessage("La ciudad ya existe");
         }else{
+            // Como la ciudad no existe la agregamos a la lista de fragments
             WeatherFragment weatherFragment = WeatherFragment.newInstance();
             fragmentList.add(weatherFragment);
             weatherFragment.setWeatherBase(weatherBase);

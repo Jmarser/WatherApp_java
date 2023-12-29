@@ -61,7 +61,7 @@ public class ForecastActivity extends AppCompatActivity implements ForecastView{
     }
 
     private void initListeners(){
-        binding.imgBack.setOnClickListener(view -> onBackPressed());
+        binding.imgBack.setOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
     }
 
     private void renderRecyclerForecast() {
