@@ -26,6 +26,7 @@
     <string name="visibility_prueba">10km</string>
     <string name="dia">Día prueba, 22:30</string>
     <string name="coord_prueba">12,235689</string>
+    <string name="version_prueba">1.0</string>
 
     <!-- TODO: textos fragment weather -->
     <string name="pronostico_horas">Previsión prox. horas</string>
@@ -65,6 +66,10 @@
     <string name="october">Octubre</string>
     <string name="november">Noviembre</string>
     <string name="december">Diciembre</string>
+    <string name="version_app">Versión App:</string>
+    <string name="desarrollador">Juan Márquez Serrano</string>
+    <string name="nick_desarrollador">JMARSER</string>
+    <string name="text_desarrollador">Desarrollador:</string>
 
 
 </resources>

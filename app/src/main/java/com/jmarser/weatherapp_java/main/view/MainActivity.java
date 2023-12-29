@@ -39,6 +39,7 @@ import com.jmarser.weatherapp_java.di.appComponent.AppComponent;
 import com.jmarser.weatherapp_java.di.appComponent.DaggerAppComponent;
 import com.jmarser.weatherapp_java.di.appModule.AppModule;
 import com.jmarser.weatherapp_java.di.appModule.SharedPreferencesModule;
+import com.jmarser.weatherapp_java.info.InfoActivity;
 import com.jmarser.weatherapp_java.main.adapters.FragmentPagerAdapter;
 import com.jmarser.weatherapp_java.main.presenter.MainPresenter;
 import com.jmarser.weatherapp_java.utils.Constants;
@@ -181,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
             if (itemId == R.id.menu_info) {
                 ToastMessage("Info");
+                startActivity(new Intent(MainActivity.this, InfoActivity.class));
                 return true;
             }
             return false;
