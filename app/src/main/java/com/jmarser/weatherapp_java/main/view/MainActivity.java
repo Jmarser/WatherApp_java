@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         pagerAdapter = new FragmentPagerAdapter(this, fragmentList);
         binding.vpFragment.setAdapter(pagerAdapter);
 
+        /**
+         * Como por el ciclo de vida de la actividad después del método onCreate pasamos al de onResumen() se duplican las ciudades del sharedpreferences en los fragments
+         * por lo que obtenemos los datos y creamos la vista en el onResumen()
+         * */
 //        getDataSharedPreferences();
 //        renderView();
 
@@ -212,22 +216,38 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if(fragmentList == null){
             fragmentList = new ArrayList<>();
         }
-        WeatherFragment weatherFragment = WeatherFragment.newInstance();
-        fragmentList.add(weatherFragment);
-        weatherFragment.setWeatherBase(weatherBase);
-        pagerAdapter.updateList(fragmentList);
-        renderView();
 
-        new TabLayoutMediator(binding.tabDots, binding.vpFragment, (((tab, position) -> {
-            WeatherFragment weatherFragment1 = (WeatherFragment) fragmentList.get(position);
-            if (weatherFragment1 != null && weatherFragment1.getWeatherBase() != null){
-                String nameCity = weatherFragment1.getWeatherBase().getName();
-                tab.setText(nameCity);
-            }else{
-                tab.setText("Ciudad " + (position + 1));
+        // Verificar si ya existe un fragment con la misma información
+        if (checkFragmentExist(weatherBase)){
+            ToastMessage("La ciudad ya existe");
+        }else{
+            WeatherFragment weatherFragment = WeatherFragment.newInstance();
+            fragmentList.add(weatherFragment);
+            weatherFragment.setWeatherBase(weatherBase);
+            pagerAdapter.updateList(fragmentList);
+            renderView();
+
+            new TabLayoutMediator(binding.tabDots, binding.vpFragment, (((tab, position) -> {
+                WeatherFragment weatherFragment1 = (WeatherFragment) fragmentList.get(position);
+                if (weatherFragment1 != null && weatherFragment1.getWeatherBase() != null){
+                    String nameCity = weatherFragment1.getWeatherBase().getName();
+                    tab.setText(nameCity);
+                }else{
+                    tab.setText("Ciudad " + (position + 1));
+                }
+            }))).attach();
+        }
+    }
+
+    private boolean checkFragmentExist(WeatherBase weatherBase){
+        boolean exists = false;
+        for (Fragment fragment : fragmentList) {
+            WeatherFragment weatherFragment = (WeatherFragment) fragment;
+            if(weatherFragment.getWeatherBase().toString().equals(weatherBase.toString())){
+                exists = true;
             }
-        }))).attach();
-
+        }
+        return exists;
     }
 
     @Override

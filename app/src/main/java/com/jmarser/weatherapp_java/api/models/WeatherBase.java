@@ -5,8 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class WeatherBase implements Parcelable {
 
@@ -169,6 +170,11 @@ public class WeatherBase implements Parcelable {
 
 	public void setWind(Wind wind) {
 		this.wind = wind;
+	}
+
+	@Override
+	public String toString() {
+		return name + ", " + sys.getCountry();
 	}
 
 	/** Implementación Parcelable **/
